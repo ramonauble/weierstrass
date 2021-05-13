@@ -12,20 +12,20 @@ $(document).ready(function() {
 
   var weierCurve = [];
   var a = .24;
-  var b = 48;
+  var b = 2400;
   var locX;
   var max = 0;
-  var xInc = wCanvW/1024.0;
+  var xInc = wCanvW/2048.0;
 
   var lastUpdate;
   var updateTime = 33.333333; //ms
   function drawCanvas(timestamp) {
     if (lastUpdate == undefined || (timestamp - lastUpdate) > updateTime) {
       lastUpdate = timestamp; //record latest update time
-      for (let x = 0; x < 1024; x++) {
-        locX = 2*(x/1023) - 1; //normalize x to [-1, 1];
+      for (let x = 0; x < 2048; x++) {
+        locX = 2*(x/2047) - 1; //normalize x to [-1, 1];
         weierCurve[x] = 0; //clear accumulator
-        for (let n = 0; n < 8; n++) {
+        for (let n = 0; n < 16; n++) {
           weierCurve[x] += Math.pow(a, n) * Math.cos((b**n)*locX*Math.PI);
         }
         if (Math.abs(weierCurve[x]) > max) { //discern max for each frame
@@ -35,7 +35,7 @@ $(document).ready(function() {
       let wX = 0;
       let wY = 0;
       weierCanvCtx.beginPath();
-      for (let c = 0; c < 1024; c++) {
+      for (let c = 0; c < 2047; c++) {
         wY = (((weierCurve[c]/max) + 1)/2)*wCanvH;
         if (c == 0) {
           weierCanvCtx.moveTo(wX, wY);
