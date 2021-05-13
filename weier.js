@@ -12,12 +12,12 @@ $(document).ready(function() {
 
   var weierCurve = [];
   var a = .69;
-  var b = 7200;
+  var b = 8;
   var locX;
   var max = 0;
   var samples = 2048.0;
   var xInc = wCanvW/samples;
-  var xWidth = 16;
+  var xWidth = 2;
 
   var lastUpdate;
   var updateTime = 33.333333; //ms
