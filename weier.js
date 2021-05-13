@@ -15,7 +15,7 @@ $(document).ready(function() {
   var b = 7200;
   var locX;
   var max = 0;
-  var samples = 4096.0;
+  var samples = 2048.0;
   var xInc = wCanvW/samples;
   var xWidth = 16;
 
@@ -36,6 +36,7 @@ $(document).ready(function() {
       }
       let wX = 0;
       let wY = 0;
+      var xInc = wCanvW/samples;
       weierCanvCtx.beginPath();
       for (let c = 0; c <= samples; c++) {
         wY = wCanvH - (((weierCurve[c]/max) + 1)/2)*wCanvH;
@@ -65,5 +66,9 @@ $(document).ready(function() {
   $("#xSlider").on("input", function() {
     let $this = $(this);
     xWidth = $this.val();
+  });
+  $("#depthSlider").on("input", function() {
+    let $this = $(this);
+    samples = $this.val();
   });
 });
